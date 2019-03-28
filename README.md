@@ -9,6 +9,7 @@ If you are using Unicorn with Rainbow serialization in your Sitecore projects th
 
 ## How do you use this library?
 This library adds an extension method with overloaded options to FakeDb's Db class.  The method AddYml() accepts 1 or more filepaths to Rainbow files or directories.  
+```c#
     public Sitecore.FakeDb.Db WithSerializedFiles()
     {
         var db = new Sitecore.FakeDb.Db();
@@ -18,3 +19,4 @@ This library adds an extension method with overloaded options to FakeDb's Db cla
             );
         return db;
     }
+```
