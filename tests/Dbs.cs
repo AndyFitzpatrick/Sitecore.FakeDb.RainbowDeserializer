@@ -7,18 +7,51 @@ namespace RainbowSerialization.Tests
 {
     public static class Dbs
     {
-        private static Db _default { get; set; }
         public static Db Default()
         {
-            if (_default == null)
-            {
-                _default = new Db();
-                _default.AddYml(true,
-                    GetPathTo("Content"),
-                    GetPathTo("Templates"));
-            }
+            var db = new Db();
+            db.AddYml(true,
+                GetPathTo("Content"),
+                GetPathTo("Templates"));
 
-            return _default;
+            return db;
+        }
+
+        public static Db ContentOnly()
+        {
+            var db = new Db();
+            db.AddYml(true,
+                GetPathTo("Content"));
+
+            return db;
+        }
+
+        public static Db TemplatesOnly()
+        {
+            var db = new Db();
+            db.AddYml(true,
+                GetPathTo(@"Templates\Habitat\Page Types"));
+
+            return db;
+        }
+
+        public static Db ContentFile()
+        {
+            var db = new Db();
+            db.AddYml(true,
+                GetPathTo(@"Content\Habitat\Home\About Habitat.yml"));
+
+            return db;
+        }
+
+        public static Db ContentAndTemplateFiles()
+        {
+            var db = new Db();
+            db.AddYml(true,
+                GetPathTo(@"Templates\Habitat\Page Types\Section.yml"),
+                GetPathTo(@"Content\Habitat\Home\About Habitat.yml"));
+
+            return db;
         }
 
         public static string GetPathTo(string folder)
