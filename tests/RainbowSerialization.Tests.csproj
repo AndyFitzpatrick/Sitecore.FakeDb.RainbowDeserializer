@@ -1,0 +1,539 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{32EEC15A-E2BC-4869-A876-52B5864B4DEB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RainbowSerialization.Tests</RootNamespace>
+    <AssemblyName>RainbowSerialization.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.1.0.0\lib\netstandard1.1\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.0.0\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Caching, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.Caching.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Configuration, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.Configuration.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.ServiceBus, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.ServiceBus.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.ServiceBus.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.WindowsAzure.Storage, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.WindowsAzure.Storage.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.1.3.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.1.3.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Mvp.Xml, Version=2.3.0.0, Culture=neutral, PublicKeyToken=6ead800d778c9b9f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mvp.Xml.2.3.0\lib\net20\Mvp.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.FakeDb, Version=1.7.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.FakeDb.1.7.4\lib\net45\Sitecore.FakeDb.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Kernel, Version=11.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Kernel.9.0.171219\lib\NET462\Sitecore.Kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Logging, Version=11.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Logging.9.0.171219\lib\NET462\Sitecore.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Logging.Client, Version=11.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Logging.Client.9.0.171219\lib\NET462\Sitecore.Logging.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Nexus, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Nexus.9.0.171219\lib\NET462\Sitecore.Nexus.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.NVelocity, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.NVelocity.9.0.171219\lib\NET462\Sitecore.NVelocity.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Zip, Version=11.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Zip.9.0.171219\lib\NET462\Sitecore.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Reflection, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.4.1.0\lib\net462\System.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Extensions.4.1.0\lib\net462\System.Runtime.Extensions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dbs.cs" />
+    <Compile Include="Ids.cs" />
+    <Compile Include="DbTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="serialization\Content\Habitat.yml" />
+    <None Include="serialization\Content\Habitat\Global.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Accounts Menu.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Accounts Menu\Edit Details.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Accounts Menu\Email.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Accounts Menu\Login.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Accounts Menu\Logout.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Edit Profile.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Edit Profile\Edit Profile First Name Placeh.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Edit Profile\Edit Profile Last Name Placeho.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Edit Profile\Edit Profile Phone Placeholder.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Edit Profile\Edit Profile Success.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Edit Profile\Email.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Edit Profile\First Name.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Edit Profile\Interests.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Edit Profile\Last Name.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Edit Profile\Phone Number.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Edit Profile\Profile Mismatch.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Edit Profile\Update.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Forgot Password.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Forgot Password\Email.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Forgot Password\Forgot Password Email Placehol.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Forgot Password\Reset Password Info.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Forgot Password\Reset Password.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Login.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Login\Email.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Login\Forgot Your Password.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Login\Login E-mail Placeholder.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Login\Login Password Placeholder.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Login\Login.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Login\Password.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Login\Register.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Register.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Register\Confirm Password.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Register\Email.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Register\Password.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Register\Register Confirm Password Plac.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Register\Register Email Placeholder.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Register\Register Password Placeholder.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Accounts\Register\Register.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Alerts.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Alerts\Friendly.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Alerts\Friendly\Invalid data source template.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Alerts\Invalid data source.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Contact Details.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Contact Details\Number Of Visits.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\ExperiencePanel.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\ExperiencePanel\Close Label.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\ExperiencePanel\Close Visit Details Panel.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\ExperiencePanel\End Visit Label.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\ExperiencePanel\End Visit.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\ExperiencePanel\Open Visit Details Panel.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\ExperiencePanel\Refresh Label.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\ExperiencePanel\Refresh Visit Details.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Onsite Behavior.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Onsite Behavior\Current Visit.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Onsite Behavior\Goals Tab.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Onsite Behavior\Goals Triggered.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Onsite Behavior\Historic.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Onsite Behavior\No Goals.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Onsite Behavior\No Outcomes.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Onsite Behavior\No Page Events.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Onsite Behavior\No Profiling.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Onsite Behavior\Outcomes.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Onsite Behavior\Page Event Elapsed.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Onsite Behavior\Page Event Name.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Onsite Behavior\Page Events Tab.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Onsite Behavior\Profiling.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Onsite Behavior\Title.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Page View.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Page View\Home.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\PageView.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\PageView\Home.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Personal Info.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Personal Info\Address.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Personal Info\Anonymous User.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Personal Info\Email.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Personal Info\Identified User.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Personal Info\Phone.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Personal Info\Title.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Referral.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Referral\Campaigns.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Referral\Device Browser.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Referral\Device Title.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Referral\Device.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Referral\No Campaigns.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Referral\Referrer Unknown.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Referral\Referrer.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Referral\Title.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Visits.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Visits\Engagement Value.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Visits\Engagement.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Visits\First Visit.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Visits\Number Of Visits.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Visits\Pages This Visit.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Visits\Pages Viewed.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Demo\Visits\Total Visits.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Identity.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Identity\Contact Information.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Identity\Contact Information\Email.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Identity\Contact Information\Title.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Maps.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Maps\Map.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Maps\Map\Page Edit.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Media.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Media\Carousel.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Media\Carousel\Next.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Media\Carousel\Previous.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\News.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\News\Latest News.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\News\Latest News\Read More.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\News\Latest News\Title.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\News\News Teaser.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\News\News Teaser\Read More.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\News\Search.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\News\Search\Content Type.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Page Content.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Page Content\Page Teaser.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Page Content\Page Teaser\Read more.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Page Content\Search.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Page Content\Search\Content Type.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\PageContent.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\PageContent\Teaser.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\PageContent\Teaser\Read more.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Person.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Person\Employee Contact Teaser.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Person\Employee Contact Teaser\Read more.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Person\Employee Teaser.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Person\Employee Teaser\Read more.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Person\EmployeeContactTeaser.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Person\EmployeeContactTeaser\Read more.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Person\EmployeeList.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Person\EmployeeList\Read More.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Person\Search.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Person\Search\Content Type.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Search.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Search\Header.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Search\Header\Search Again.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Search\Header\Title No Search.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Search\Header\Title With Results.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\teaser.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\teaser\carousel.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\teaser\carousel\next.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\teaser\carousel\previous.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Website.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Website\Sidebar.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Website\Sidebar\Close Visit Details Panel.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Website\Sidebar\End Visit.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Website\Sidebar\Open Visit Details Panel.yml" />
+    <None Include="serialization\Content\Habitat\Global\Dictionary\Website\Sidebar\Refresh Visit Details Panel.yml" />
+    <None Include="serialization\Content\Habitat\Global\FAQ.yml" />
+    <None Include="serialization\Content\Habitat\Global\FAQ\What is FAQ.yml" />
+    <None Include="serialization\Content\Habitat\Global\FAQ\What is Habitat.yml" />
+    <None Include="serialization\Content\Habitat\Global\Interests.yml" />
+    <None Include="serialization\Content\Habitat\Global\Interests\Skiing.yml" />
+    <None Include="serialization\Content\Habitat\Global\Interests\Swiming.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\Footer Menu.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\Footer Menu\Left.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\Footer Menu\Left\Community.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\Footer Menu\Left\Documentation.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\Footer Menu\Left\Knowledge Base.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\Footer Menu\Left\Partner Network.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\Footer Menu\Right.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\Footer Menu\Right\Contact Sitecore.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\Footer Menu\Right\Sitecore Blog.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\Footer Menu\Right\Sitecore Stackexchange.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\Footer Menu\Right\Technical Blog.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\GitHub.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\GitHub\GitHub Repository.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\GitHub\How to Contribute.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\GitHub\Wiki.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\Social Menu.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\Social Menu\Facebook.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\Social Menu\Twitter.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\Social Menu\YouTube.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\Topbar Menu.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\Topbar Menu\Habitat.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\Topbar Menu\Helix.yml" />
+    <None Include="serialization\Content\Habitat\Global\Links\Topbar Menu\Sitecore.yml" />
+    <None Include="serialization\Content\Habitat\Global\Map Points.yml" />
+    <None Include="serialization\Content\Habitat\Global\Map Points\Sitecore Offices.yml" />
+    <None Include="serialization\Content\Habitat\Global\Map Points\Sitecore Offices\Copenhagen.yml" />
+    <None Include="serialization\Content\Habitat\Global\Map Points\Sitecore Offices\San Francisco.yml" />
+    <None Include="serialization\Content\Habitat\Global\Map Points\Sitecore Offices\Sydney.yml" />
+    <None Include="serialization\Content\Habitat\Global\Map Points\Sydney Beaches.yml" />
+    <None Include="serialization\Content\Habitat\Global\Map Points\Sydney Beaches\Balmoral.yml" />
+    <None Include="serialization\Content\Habitat\Global\Map Points\Sydney Beaches\Bondi.yml" />
+    <None Include="serialization\Content\Habitat\Global\Map Points\Sydney Beaches\Manly.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\Architecture Introduction.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\Carousel.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\Dependencies.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\DependenciesFolder.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\DependenciesFolder\Dependencies 1.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\DependenciesFolder\Dependencies 2.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\DependenciesFolder\Dependencies 3.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\DependenciesFolder\Dependencies 4.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\DependenciesFolder\Dependencies 5.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\DependenciesFolder\Dependencies 6.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\Experience.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\Extensibility.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\Flexibility.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\Habitat Getting Started Video.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\Habitat Introduction Video.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\Habitat Layers Video.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\Habitat Modules Video.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\Lightbox Image Documentation.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\Lightbox Video Documentation.yml" />
+    <None Include="serialization\Content\Habitat\Global\Media\Simplicity.yml" />
+    <None Include="serialization\Content\Habitat\Global\Quotes.yml" />
+    <None Include="serialization\Content\Habitat\Global\Quotes\Groundbreaking.yml" />
+    <None Include="serialization\Content\Habitat\Global\Quotes\Jane Douane.yml" />
+    <None Include="serialization\Content\Habitat\Global\Registration.yml" />
+    <None Include="serialization\Content\Habitat\Global\Registration\Forgot Password Mail.yml" />
+    <None Include="serialization\Content\Habitat\Global\Social.yml" />
+    <None Include="serialization\Content\Habitat\Global\Social\sitecorehabitat.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\About Habitat.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Content.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Content\Example Divider.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Content\Recommended Reading.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Content\The Common Closure Principle.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Content\The Common Reuse Principle.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Content\The Release Reuse Equivalency_.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Content\The Stable Abstractions Princi.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Content\The Stable Dependencies Princi.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Content\TitleSummaryTeaser.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Download.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Examples.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Extensibility.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Flexibility.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Headline Employee Teasers.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Helix.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Lighboxes.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Media Documentation.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Simplicity.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Sitecore Experience Platform.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Teaser Page.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Teaser Page\Call to Action Content.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Teaser Page\Dynamic Jumbotron Carousel.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Teaser Page\Dynamic Teaser Content.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Teaser Page\Dynamic Teaser Content\Extensibility.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Teaser Page\Dynamic Teaser Content\Flexibility.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Teaser Page\Dynamic Teaser Content\Simplicity.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Teaser Page\Headline Accordion.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Teaser Page\Headline Call to Action.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Teaser Page\Headline Carousel.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Teaser Page\Headline Employee Carousel.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Teaser Page\Headline Jumbotron Carousel.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Teaser Page\Headline Tabs.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Teaser Page\Headline Teasers.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Teaser Page\Teaser Carousel.yml" />
+    <None Include="serialization\Content\Habitat\Global\Teasers\Teasers Documentation.yml" />
+    <None Include="serialization\Content\Habitat\Home.yml" />
+    <None Include="serialization\Content\Habitat\Home\About Habitat.yml" />
+    <None Include="serialization\Content\Habitat\Home\About Habitat\Getting Started.yml" />
+    <None Include="serialization\Content\Habitat\Home\About Habitat\Getting Started\_Local.yml" />
+    <None Include="serialization\Content\Habitat\Home\About Habitat\Helix Documentation.yml" />
+    <None Include="serialization\Content\Habitat\Home\About Habitat\Introduction.yml" />
+    <None Include="serialization\Content\Habitat\Home\About Habitat\Introduction\Dependencies and Layers.yml" />
+    <None Include="serialization\Content\Habitat\Home\About Habitat\Introduction\Modular Architecture.yml" />
+    <None Include="serialization\Content\Habitat\Home\About Habitat\Introduction\_Local.yml" />
+    <None Include="serialization\Content\Habitat\Home\About Habitat\Introduction\_Local\Habitat Introduction.yml" />
+    <None Include="serialization\Content\Habitat\Home\About Habitat\Introduction\_Local\Helix Intro Blogpost.yml" />
+    <None Include="serialization\Content\Habitat\Home\About Habitat\Introduction\_Local\Principles.yml" />
+    <None Include="serialization\Content\Habitat\Home\Edit Profile.yml" />
+    <None Include="serialization\Content\Habitat\Home\Login.yml" />
+    <None Include="serialization\Content\Habitat\Home\Login\Forgot Password.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Accounts.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Accounts\_Local.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Accounts\_Local\Login Teaser.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Demo.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Demo\Fake GeoData.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Demo\Fake IP Address.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Demo\Fake Page.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Demo\Fake Referrer.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Demo\_Local.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Demo\_Local\Chart Example.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Demo\_Local\Demo Content.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\FAQ.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\FAQ\FAQ Group.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Identity.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Language.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Maps.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Maps\Map Page.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Media.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Media\_Local.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Media\_Local\Videos Headline.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Metadata.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Navigation.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Navigation\External Link.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\News.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\News\News.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\News\News\2015.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\News\News\2015\08.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\News\News\2015\08\24.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\News\News\2015\08\24\17.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\News\News\2015\08\24\17\57.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\News\News\2015\08\24\17\57\Best In Class.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\News\News\2015\08\24\17\57\Best In Class\_Local.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\News\News\2015\08\24\17\57\Best In Class\_Local\Local Content Example.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\News\News\2015\08\24\17\57\Experience Management.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\News\News\2015\08\24\17\57\New version.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Page Content.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Person.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Person\Employees List.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Person\Employees List\John Doe.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Person\Employees List\John Howard.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Search.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Search\Search results.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Social.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Feature\Teasers.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Foundation.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Foundation\Assets.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Foundation\Indexing.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Foundation\Serialization.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Foundation\Sitecore Extensions.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Foundation\Theming.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Project.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Project\Common.yml" />
+    <None Include="serialization\Content\Habitat\Home\Modules\Project\Habitat.yml" />
+    <None Include="serialization\Content\Habitat\Home\More Info.yml" />
+    <None Include="serialization\Content\Habitat\Home\More Info\_Local.yml" />
+    <None Include="serialization\Content\Habitat\Home\More Info\_Local\Demos.yml" />
+    <None Include="serialization\Content\Habitat\Home\Register.yml" />
+    <None Include="serialization\Content\Habitat\Home\Search.yml" />
+    <None Include="serialization\Content\Habitat\Home\Secure Page.yml" />
+    <None Include="serialization\Content\Habitat\Home\_Local.yml" />
+    <None Include="serialization\Content\Habitat\Home\_Local\Getting Started.yml" />
+    <None Include="serialization\Content\Habitat\Settings.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\carousel.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\democontent.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\dynamicteaser.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\employee.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\employeeslist.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\faq.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\headlines.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\identity.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\jumbotronteaser.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\lightboximage.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\lightboxvideo.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\linkmenu.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\loginteaser.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\mappoints.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\newsarticle.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\newslist.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\pagecontent.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\pageteaser.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\person.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\quote.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\searchsettings.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\teasers.yml" />
+    <None Include="serialization\Content\Habitat\Settings\Datasources\twitterfeed.yml" />
+    <None Include="serialization\Content\Habitat\Settings\localteasers.yml" />
+    <None Include="serialization\Templates\Habitat.yml" />
+    <None Include="serialization\Templates\Habitat\Content Types.yml" />
+    <None Include="serialization\Templates\Habitat\Content Types\Site Root.yml" />
+    <None Include="serialization\Templates\Habitat\Content Types\Site Root\__Standard Values.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Article.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Article\__Standard Values.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Edit Profile Page.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Edit Profile Page\__Standard Values.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Employee.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Employees folder.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Employees folder\__Standard Values.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Employee\__Standard Values.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Forgot Password Page.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Forgot Password Page\__Standard Values.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Home.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Home\__Standard Values.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Login Page.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Login Page\__Standard Values.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Map Page.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Map Page\__Standard Values.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\News Article.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\News Article\__Standard Values.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\News List.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\News List\__Standard Values.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Register Page.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Register Page\__Standard Values.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Search Results.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Search Results\__Standard Values.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Section.yml" />
+    <None Include="serialization\Templates\Habitat\Page Types\Section\__Standard Values.yml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\src\RainbowSerialization.csproj">
+      <Project>{01f624ce-009c-4fee-ae2e-a5453cbdd626}</Project>
+      <Name>RainbowSerialization</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.props'))" />
+    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.targets'))" />
+  </Target>
+  <Import Project="..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.targets')" />
+</Project>
