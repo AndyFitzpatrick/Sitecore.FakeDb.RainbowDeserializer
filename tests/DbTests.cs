@@ -113,7 +113,7 @@ namespace RainbowSerialization.Tests
         }
 
         [TestMethod]
-        public void TemplatesOnly_HomeTemplate_CorrectCreatedBy()
+        public void TemplatesOnly_HomeTemplate_CorrectName()
         {
             // Arrange
             using (var db = Dbs.TemplatesOnly())
@@ -123,7 +123,7 @@ namespace RainbowSerialization.Tests
                 var template = db.GetItem(Ids.HomeTemplate);
 
                 // Assert
-                Assert.IsTrue(template[Sitecore.FieldIDs.CreatedBy] == @"sitecore\Sylvie");
+                Assert.IsTrue(template.Name == "Home");
             }
         }
 
