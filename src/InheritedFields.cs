@@ -12,7 +12,7 @@ namespace Sitecore.FakeDb.RainbowSerialization
             {
                 foreach (var item in items)
                 {
-                    var fields = GetBaseTemplateFields(item.TemplateID, templates);
+                    var fields = GetBaseTemplateFields(item.TemplateID, templates, items);
 
                     if (fields != null && fields.Count > 0)
                     {
@@ -26,7 +26,7 @@ namespace Sitecore.FakeDb.RainbowSerialization
             }
         }
 
-        private static List<DbField> GetBaseTemplateFields(ID id, List<DbTemplate> templates)
+        private static List<DbField> GetBaseTemplateFields(ID id, List<DbTemplate> templates, List<DbItem> items)
         {
             List<DbField> fields = new List<DbField>();
 
@@ -36,13 +36,20 @@ namespace Sitecore.FakeDb.RainbowSerialization
 
                 if (template != null)
                 {
-                    if (template.Fields != null && template.Fields.Count() > 0)
-                        fields.AddRange(template.Fields);
+                    var standardValues = items.FirstOrDefault(item => item.ParentID == template.ID && item.Name == "__Standard Values");
+                    if (standardValues != null)
+                    {
+                        foreach (var field in standardValues.Fields)
+                        {
+                            if (!fields.Any(f => f.Name == field.Name))
+                                fields.Add(field);
+                        }
+                    }
 
                     if (template.BaseIDs != null && template.BaseIDs.Count() > 0)
                     {
                         foreach (ID bid in template.BaseIDs)
-                            fields.AddRange(GetBaseTemplateFields(bid, templates));
+                            fields.AddRange(GetBaseTemplateFields(bid, templates, items));
                     }
                 }
             }

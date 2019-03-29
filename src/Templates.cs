@@ -14,9 +14,6 @@ namespace Sitecore.FakeDb.RainbowSerialization
 
             foreach (var templateItem in templateItems)
             {
-                var sections = items.Where(item => item.ParentID == templateItem.ID && item.Name != "__Standard Values").ToList();
-                var standardValues = items.FirstOrDefault(item => item.ParentID == templateItem.ID && item.Name == "__Standard Values");
-
                 var template = new DbTemplate(templateItem.Name, templateItem.ID);
                 template.ParentID = templateItem.ParentID;
                 template.FullPath = templateItem.FullPath;
@@ -25,7 +22,7 @@ namespace Sitecore.FakeDb.RainbowSerialization
                 if (ids != null)
                     template.BaseIDs = ids;
 
-                GetFields(sections, items, template, standardValues);
+                GetFields(items, template);
 
                 if (!items.Any(t => t.ID == template.ParentID))
                     template.ParentID = ItemIDs.TemplateRoot;
@@ -122,23 +119,15 @@ namespace Sitecore.FakeDb.RainbowSerialization
             return fields;
         }
 
-        private static void GetFields(IEnumerable<DbItem> sections, IEnumerable<DbItem> items, DbTemplate template, DbItem standardValues)
+        private static void GetFields(IEnumerable<DbItem> items, DbTemplate template)
         {
-            var fieldItems = items.Where(field => sections.Select(i => i.ID).Contains(field.ParentID)).ToList();
+            var sections = items.Where(item => item.ParentID == template.ID && item.Name != "__Standard Values").ToList();
+            var fieldItems = items.Where(field => sections != null && sections.Select(i => i.ID).Contains(field.ParentID)).ToList();
 
             foreach (var fieldItem in fieldItems)
             {
                 if (fieldItem != null && fieldItem.TemplateID == TemplateIDs.TemplateField)
-                {
-                    if (standardValues != null && standardValues.Fields.Any(t => t.ID == fieldItem.ID))
-                    {
-                        DbField field = new DbField(fieldItem.Name, fieldItem.ID);
-                        field.Value = standardValues.Fields[fieldItem.ID].Value;
-                        template.Fields.Add(field);
-                    }
-                    else
-                        template.Fields.Add(new DbField(fieldItem.Name, fieldItem.ID));
-                }
+                    template.Fields.Add(new DbField(fieldItem.Name, fieldItem.ID));
             }
         }
     }
