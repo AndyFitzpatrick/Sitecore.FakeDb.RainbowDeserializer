@@ -41,7 +41,9 @@ namespace Sitecore.FakeDb.RainbowSerialization
 
             for (int i = 0; i < items.Count; i++)
             {
-                if (!items[i].FullPath.StartsWith("/sitecore/templates/"))
+                if (!items[i].FullPath.StartsWith("/sitecore/templates/") &&
+                    items[i].TemplateID != Sitecore.TemplateIDs.Folder &&
+                    items[i].TemplateID != Sitecore.TemplateIDs.MediaFolder)
                 {
                     var existing = templates.FirstOrDefault(t => t.ID == items[i].TemplateID);
                     if (existing == null)
