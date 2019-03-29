@@ -68,6 +68,21 @@ namespace RainbowSerialization.Tests
         }
 
         [TestMethod]
+        public void Japanese_HabitatHome_CorrectTitle()
+        {
+            // Arrange
+            using (var db = Dbs.Japanese())
+            {
+
+                // Act
+                var home = db.GetItem(Ids.Habitat);
+
+                // Assert
+                Assert.IsTrue(home["Title"] == "Habitat について");
+            }
+        }
+
+        [TestMethod]
         public void ContentOnly_Login_NotNull()
         {
             // Arrange

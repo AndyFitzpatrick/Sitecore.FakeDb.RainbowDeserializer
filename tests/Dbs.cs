@@ -17,6 +17,17 @@ namespace RainbowSerialization.Tests
             return db;
         }
 
+        public static Db Japanese()
+        {
+            var db = new Db();
+            db.Configuration.Settings["RainbowSerialization_Language"] = "ja-JP";
+            db.AddYml(true,
+                GetPathTo("Content"),
+                GetPathTo("Templates"));
+
+            return db;
+        }
+
         public static Db ContentOnly()
         {
             var db = new Db();
