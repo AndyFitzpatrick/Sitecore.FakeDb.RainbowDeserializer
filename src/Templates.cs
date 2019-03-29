@@ -78,6 +78,9 @@ namespace Sitecore.FakeDb.RainbowSerialization
                     }
                 }
             }
+
+            if (missingFields.Fields.Count() > 0)
+                templates.Add(missingFields);
         }
 
         private static ID[] BaseTemplateIds(DbItem item)
