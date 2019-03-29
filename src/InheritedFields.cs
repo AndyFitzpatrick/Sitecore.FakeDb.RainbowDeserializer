@@ -6,13 +6,13 @@ namespace Sitecore.FakeDb.RainbowSerialization
 {
     public static class InheritedFields
     {
-        public static void Add(List<DbItem> items, List<DbTemplate> templates)
+        public static void Add(List<DbItem> items, List<DbItem> allItems, List<DbTemplate> templates)
         {
             if (items != null && items.Count > 0 && templates != null && templates.Count > 0)
             {
                 foreach (var item in items)
                 {
-                    var fields = GetBaseTemplateFields(item.TemplateID, templates, items);
+                    var fields = GetBaseTemplateFields(item.TemplateID, templates, allItems);
 
                     if (fields != null && fields.Count > 0)
                     {
@@ -26,7 +26,7 @@ namespace Sitecore.FakeDb.RainbowSerialization
             }
         }
 
-        private static List<DbField> GetBaseTemplateFields(ID id, List<DbTemplate> templates, List<DbItem> items)
+        private static List<DbField> GetBaseTemplateFields(ID id, List<DbTemplate> templates, List<DbItem> allItems)
         {
             List<DbField> fields = new List<DbField>();
 
@@ -36,7 +36,7 @@ namespace Sitecore.FakeDb.RainbowSerialization
 
                 if (template != null)
                 {
-                    var standardValues = items.FirstOrDefault(item => item.ParentID == template.ID && item.Name == "__Standard Values");
+                    var standardValues = allItems.FirstOrDefault(item => item.ParentID == template.ID && item.Name == "__Standard Values");
                     if (standardValues != null)
                     {
                         foreach (var field in standardValues.Fields)
@@ -49,7 +49,7 @@ namespace Sitecore.FakeDb.RainbowSerialization
                     if (template.BaseIDs != null && template.BaseIDs.Count() > 0)
                     {
                         foreach (ID bid in template.BaseIDs)
-                            fields.AddRange(GetBaseTemplateFields(bid, templates, items));
+                            fields.AddRange(GetBaseTemplateFields(bid, templates, allItems));
                     }
                 }
             }

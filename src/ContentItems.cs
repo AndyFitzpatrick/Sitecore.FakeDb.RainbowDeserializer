@@ -8,7 +8,7 @@ namespace Sitecore.FakeDb.RainbowSerialization
         public static IEnumerable<DbItem> Get(List<DbItem> items, List<DbTemplate> templates)
         {
             List<DbItem> model = items.Where(i => i.FullPath.StartsWith("/sitecore/content/")).ToList();
-            InheritedFields.Add(model, templates);
+            InheritedFields.Add(model, items, templates);
 
             if (model != null && model.Count() > 0)
             {
