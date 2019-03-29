@@ -56,7 +56,7 @@ namespace Sitecore.FakeDb.RainbowSerialization
                         foreach (var field in items[0].Fields.Where(field => !field.Name.StartsWith("__")))
                         {
                             if (!missingFields.Fields.Any(f => f.Name == field.Name))
-                                missingFields.Fields.Add(field);
+                                missingFields.Fields.Add(new DbField(field.Name, field.ID));
                         }
 
                         templates.Add(template);
@@ -70,7 +70,7 @@ namespace Sitecore.FakeDb.RainbowSerialization
                             !baseFields.Any(bField => bField.Name == field.Name)))
                         {
                             if (!missingFields.Fields.Any(f => f.Name == field.Name))
-                                missingFields.Fields.Add(field);
+                                missingFields.Fields.Add(new DbField(field.Name, field.ID));
 
                             if (!existing.BaseIDs.Contains(missingFields.ID))
                                 existing.BaseIDs = existing.BaseIDs.Concat(new ID[] { missingFields.ID }).ToArray();
