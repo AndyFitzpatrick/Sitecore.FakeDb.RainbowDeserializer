@@ -40,6 +40,8 @@ namespace Sitecore.FakeDb.RainbowSerialization
 
         private static void AddMissing(List<DbItem> items, List<DbTemplate> templates)
         {
+            DbTemplate missingFields = new DbTemplate("Missing Fields", new ID());
+
             for (int i = 0; i < items.Count; i++)
             {
                 if (!items[i].FullPath.StartsWith("/sitecore/templates/"))
@@ -49,9 +51,13 @@ namespace Sitecore.FakeDb.RainbowSerialization
                     {
                         //Add missing templates
                         DbTemplate template = new DbTemplate(items[i].TemplateID);
+                        template.BaseIDs = new ID[] { missingFields.ID };
 
-                        foreach (var field in items[i].Fields.Where(field => !field.Name.StartsWith("__")))
-                            template.Fields.Add(new DbField(field.Name));
+                        foreach (var field in items[0].Fields.Where(field => !field.Name.StartsWith("__")))
+                        {
+                            if (!missingFields.Fields.Any(f => f.Name == field.Name))
+                                missingFields.Fields.Add(field);
+                        }
 
                         templates.Add(template);
                     }
@@ -62,7 +68,13 @@ namespace Sitecore.FakeDb.RainbowSerialization
                         foreach (var field in items[0].Fields.Where(field => !field.Name.StartsWith("__") && 
                             !existing.Fields.Any(tfield => tfield.Name == field.Name) &&
                             !baseFields.Any(bField => bField.Name == field.Name)))
-                            existing.Fields.Add(new DbField(field.Name));
+                        {
+                            if (!missingFields.Fields.Any(f => f.Name == field.Name))
+                                missingFields.Fields.Add(field);
+
+                            if (!existing.BaseIDs.Contains(missingFields.ID))
+                                existing.BaseIDs = existing.BaseIDs.Concat(new ID[] { missingFields.ID }).ToArray();
+                        }
                     }
                 }
             }
