@@ -31,21 +31,21 @@ namespace Sitecore.FakeDb.RainbowSerialization
                         deserialized.ParentID = new ID(item.ParentId);
 
                         foreach (var sharedField in item.SharedFields)
-                            deserialized.Fields.Add(new ID(sharedField.FieldId), sharedField.Value);
+                            deserialized.Fields.Add(new DbField(new ID(sharedField.FieldId)) { Name = sharedField.NameHint, Value = sharedField.Value });
 
                         foreach (var unversionedField in item.UnversionedFields)
                         {
                             if (unversionedField != null)
                             {
                                 var field = unversionedField.Fields.Last();
-                                deserialized.Fields.Add(new ID(field.FieldId), field.Value);
+                                deserialized.Fields.Add(new DbField(new ID(field.FieldId)) { Name = field.NameHint, Value = field.Value });
                             }
                         }
 
                         if (item.Versions != null && item.Versions.Count() > 0 && item.Versions.Last().Fields != null)
                         {
                             foreach (var field in item.Versions.Last().Fields)
-                                deserialized.Fields.Add(new ID(field.FieldId), field.Value);
+                                deserialized.Fields.Add(new DbField(new ID(field.FieldId)) { Name = field.NameHint, Value = field.Value });
                         }
                     }
                 }
