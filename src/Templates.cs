@@ -42,22 +42,25 @@ namespace Sitecore.FakeDb.RainbowSerialization
         {
             for (int i = 0; i < items.Count; i++)
             {
-                var existing = templates.FirstOrDefault(t => t.ID == items[i].TemplateID);
-                if (existing == null)
+                if (!items[i].FullPath.StartsWith("/sitecore/templates/"))
                 {
-                    //Add missing templates
-                    DbTemplate template = new DbTemplate(items[i].TemplateID);
+                    var existing = templates.FirstOrDefault(t => t.ID == items[i].TemplateID);
+                    if (existing == null)
+                    {
+                        //Add missing templates
+                        DbTemplate template = new DbTemplate(items[i].TemplateID);
 
-                    foreach (var field in items[i].Fields)
-                        template.Add(field);
+                        foreach (var field in items[i].Fields.Where(field => !field.Name.StartsWith("__")))
+                            template.Fields.Add(new DbField(field.Name));
 
-                    templates.Add(template);
-                }
-                else
-                {
-                    // Add missing fields
-                    foreach (var field in items[0].Fields.Where(field => !existing.Fields.Any(tfield => tfield.Name == field.Name)))
-                        existing.Fields.Add(new DbField(field.Name));
+                        templates.Add(template);
+                    }
+                    else
+                    {
+                        // Add missing fields
+                        foreach (var field in items[0].Fields.Where(field => !field.Name.StartsWith("__") && !existing.Fields.Any(tfield => tfield.Name == field.Name)))
+                            existing.Fields.Add(new DbField(field.Name));
+                    }
                 }
             }
         }
@@ -78,7 +81,7 @@ namespace Sitecore.FakeDb.RainbowSerialization
             var ids = BaseTemplateIds(item);
 
             if (ids != null)
-                return ids.Where(id => items.Any(i => i.ID == id)).ToArray();
+                return ids.Where(id => id == TemplateIDs.Template || items.Any(i => i.ID == id)).ToArray();
             else
                 return new ID[0];
         }

@@ -111,22 +111,19 @@ namespace Sitecore.FakeDb
         {
             if (paths != null && paths.Length > 0)
             {
+                List<DbItem> items = new List<DbItem>();
                 List<DbTemplate> templates = new List<DbTemplate>();
 
                 foreach (string path in paths)
-                    templates.AddRange(AddYmlTemplates(db, path, merge));
+                    items.AddRange(YmlFiles.ToDbItems(path));
 
-                foreach (string path in paths)
-                    AddYmlItems(db, templates, path, merge);
+                templates = AddYmlTemplates(db, items, merge);
+                AddYmlItems(db, items, templates, merge);
             }
         }
 
-        private static void AddYmlItems(this Db db, List<DbTemplate> templates, string filePath, bool merge = false)
+        private static void AddYmlItems(this Db db, List<DbItem> items, List<DbTemplate> templates, bool merge = false)
         {
-            Assert.IsNotNullOrEmpty(filePath, "Filepath is null or empty");
-
-            List<DbItem> items = YmlFiles.ToDbItems(filePath);
-
             if (items != null && items.Count > 0)
             {
                 db.AddRange(LayoutItems.Get(items), merge);
@@ -136,11 +133,9 @@ namespace Sitecore.FakeDb
             }
         }
 
-        private static List<DbTemplate> AddYmlTemplates(this Db db, string filePath, bool merge = false)
+        private static List<DbTemplate> AddYmlTemplates(this Db db, List<DbItem> items, bool merge = false)
         {
-            Assert.IsNotNullOrEmpty(filePath, "Filepath is null or empty");
             List<DbTemplate> templates = new List<DbTemplate>();
-            List<DbItem> items = YmlFiles.ToDbItems(filePath);
 
             if (items != null && items.Count > 0)
             {
