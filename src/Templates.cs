@@ -7,7 +7,7 @@ namespace Sitecore.FakeDb.RainbowSerialization
 {
     public static class Templates
     {
-        public static List<DbTemplate> Get(List<DbItem> items, bool preventOrphans = false)
+        public static List<DbTemplate> Get(List<DbItem> items)
         {
             var templateItems = items.Where(i => i.TemplateID == TemplateIDs.Template);
             var templates = new List<DbTemplate>();
@@ -27,45 +27,60 @@ namespace Sitecore.FakeDb.RainbowSerialization
 
                 GetFields(sections, items, template, standardValues);
 
-                if (preventOrphans && !items.Any(t => t.ID == template.ParentID))
+                if (!items.Any(t => t.ID == template.ParentID))
                     template.ParentID = ItemIDs.TemplateRoot;
 
                 templates.Add(template);
             }
 
+            AddMissing(items, templates);
+
             return templates;
         }
 
-        public static List<DbTemplate> GetMissing(List<DbItem> items, List<DbTemplate> templates, Db db, bool preventOrphans = false)
+        private static void AddMissing(List<DbItem> items, List<DbTemplate> templates)
         {
-            List<DbTemplate> missing = new List<DbTemplate>();
-
-            foreach (var item in items)
+            for (int i = 0; i < items.Count; i++)
             {
-                if (!templates.Any(t => t.ID == item.TemplateID) && db.GetItem(item.TemplateID) == null &&
-                    (missing.Count == 0 || !missing.Any(t => t.ID == item.TemplateID)))
+                var existing = templates.FirstOrDefault(t => t.ID == items[i].TemplateID);
+                if (existing == null)
                 {
-                    DbTemplate template = new DbTemplate(item.TemplateID);
+                    //Add missing templates
+                    DbTemplate template = new DbTemplate(items[i].TemplateID);
 
-                    foreach (var field in item.Fields)
-                        template.Fields.Add(new DbField(field.Name));
+                    foreach (var field in items[i].Fields)
+                        template.Add(field);
 
-                    missing.Add(template);
+                    templates.Add(template);
+                }
+                else
+                {
+                    // Add missing fields
+                    foreach (var field in items[0].Fields.Where(field => !existing.Fields.Any(tfield => tfield.Name == field.Name)))
+                        existing.Fields.Add(new DbField(field.Name));
                 }
             }
+        }
 
-            return missing;
+        private static ID[] BaseTemplateIds(DbItem item)
+        {
+            if (item != null && item.Fields.Any(t => t.ID == FieldIDs.BaseTemplate))
+                return item.Fields[FieldIDs.BaseTemplate].Value
+                    .Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(i => new ID(i))
+                    .ToArray();
+            else
+                return new ID[0];
         }
 
         private static ID[] BaseTemplateIds(DbItem item, List<DbItem> items)
         {
-            if (item != null && item.Fields.Any(t => t.ID == FieldIDs.BaseTemplate))
-            {
-                string[] ids = item.Fields[FieldIDs.BaseTemplate].Value.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-                return ids.Select(i => new ID(i)).Where(id => items.Any(i => i.ID == id)).ToArray();
-            }
+            var ids = BaseTemplateIds(item);
+
+            if (ids != null)
+                return ids.Where(id => items.Any(i => i.ID == id)).ToArray();
             else
-                return null;
+                return new ID[0];
         }
 
         private static void GetFields(IEnumerable<DbItem> sections, IEnumerable<DbItem> items, DbTemplate template, DbItem standardValues)

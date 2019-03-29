@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sitecore.FakeDb.RainbowSerialization
 {
     public static class MediaItems
     {
-        public static IEnumerable<DbItem> Get(List<DbItem> items, bool preventOrphans = false)
+        public static IEnumerable<DbItem> Get(List<DbItem> items)
         {
             var model = items.Where(item => item.FullPath.StartsWith("/sitecore/media library/"));
 
-            if (preventOrphans && model != null && model.Count() > 0)
+            if (model != null && model.Count() > 0)
             {
                 foreach (var item in model)
                 {

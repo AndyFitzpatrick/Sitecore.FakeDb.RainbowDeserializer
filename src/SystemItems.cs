@@ -5,11 +5,11 @@ namespace Sitecore.FakeDb.RainbowSerialization
 {
     public static class SystemItems
     {
-        public static IEnumerable<DbItem> Get(List<DbItem> items, bool preventOrphans = false)
+        public static IEnumerable<DbItem> Get(List<DbItem> items)
         {
             var model = items.Where(item => item.FullPath.StartsWith("/sitecore/system/"));
 
-            if (preventOrphans && model != null && model.Count() > 0)
+            if (model != null && model.Count() > 0)
             {
                 foreach (var item in model)
                 {

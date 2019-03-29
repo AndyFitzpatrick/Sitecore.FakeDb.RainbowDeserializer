@@ -5,13 +5,13 @@ namespace Sitecore.FakeDb.RainbowSerialization
 {
     public static class TemplateFolders
     {
-        public static IEnumerable<DbItem> Get(List<DbItem> items, bool preventOrphans)
+        public static IEnumerable<DbItem> Get(List<DbItem> items)
         {
             var model = items.Where(item => item.FullPath.StartsWith("/sitecore/templates/") &&
                 item.TemplateID != TemplateIDs.Template && item.TemplateID != TemplateIDs.TemplateSection &&
                 item.TemplateID != TemplateIDs.TemplateField && item.Name != "__Standard Values");
 
-            if (preventOrphans && model != null && model.Count() > 0)
+            if (model != null && model.Count() > 0)
             {
                 foreach (var item in model)
                 {
