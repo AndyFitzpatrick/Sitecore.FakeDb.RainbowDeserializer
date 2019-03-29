@@ -58,7 +58,10 @@ namespace Sitecore.FakeDb.RainbowSerialization
                     else
                     {
                         // Add missing fields
-                        foreach (var field in items[0].Fields.Where(field => !field.Name.StartsWith("__") && !existing.Fields.Any(tfield => tfield.Name == field.Name)))
+                        var baseFields = BaseTemplateFields(existing, templates);
+                        foreach (var field in items[0].Fields.Where(field => !field.Name.StartsWith("__") && 
+                            !existing.Fields.Any(tfield => tfield.Name == field.Name) &&
+                            !baseFields.Any(bField => bField.Name == field.Name)))
                             existing.Fields.Add(new DbField(field.Name));
                     }
                 }
@@ -84,6 +87,24 @@ namespace Sitecore.FakeDb.RainbowSerialization
                 return ids.Where(id => id == TemplateIDs.Template || items.Any(i => i.ID == id)).ToArray();
             else
                 return new ID[0];
+        }
+
+        private static IEnumerable<DbField> BaseTemplateFields(DbTemplate template, List<DbTemplate> templates)
+        {
+            List<DbField> fields = new List<DbField>();
+
+            if (template != null && template.BaseIDs != null && template.BaseIDs.Length > 0)
+            {
+                var baseTemplates = templates.Where(t => template.BaseIDs.Contains(t.ID));
+
+                if (baseTemplates != null && baseTemplates.Count() > 0)
+                {
+                    foreach (var bt in baseTemplates)
+                        fields.AddRange(bt.Fields);
+                }
+            }
+
+            return fields;
         }
 
         private static void GetFields(IEnumerable<DbItem> sections, IEnumerable<DbItem> items, DbTemplate template, DbItem standardValues)
