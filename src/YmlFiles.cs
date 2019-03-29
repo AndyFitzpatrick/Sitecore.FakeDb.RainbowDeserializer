@@ -52,7 +52,7 @@ namespace Sitecore.FakeDb.RainbowSerialization
 
             if (file != null)
             {
-                DbItem deserialized = Deserializer.DeserializeItem(file);
+                DbItem deserialized = Deserializer.DeserializeItem(file, Settings.Language);
 
                 if (deserialized != null)
                 {

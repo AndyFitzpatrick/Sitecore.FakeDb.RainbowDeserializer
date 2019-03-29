@@ -13,7 +13,7 @@ namespace Sitecore.FakeDb.RainbowSerialization
     /// </summary>
     public static class Deserializer
     {
-        public static DbItem DeserializeItem(FileInfo file)
+        public static DbItem DeserializeItem(FileInfo file, string language)
         {
             DbItem deserialized = null;
             var formatter = new YamlSerializationFormatter(null, null);
@@ -35,16 +35,16 @@ namespace Sitecore.FakeDb.RainbowSerialization
 
                         foreach (var unversionedField in item.UnversionedFields)
                         {
-                            if (unversionedField != null)
+                            if (unversionedField != null && unversionedField.Language.Name == language)
                             {
                                 var field = unversionedField.Fields.Last();
                                 deserialized.Fields.Add(new DbField(new ID(field.FieldId)) { Name = field.NameHint, Value = field.Value });
                             }
                         }
 
-                        if (item.Versions != null && item.Versions.Count() > 0 && item.Versions.Last().Fields != null)
+                        if (item.Versions != null && item.Versions.Count() > 0 && item.Versions.Any(v => v.Language.Name == language))
                         {
-                            foreach (var field in item.Versions.Last().Fields)
+                            foreach (var field in item.Versions.Where(v => v.Language.Name == language).Last().Fields)
                                 deserialized.Fields.Add(new DbField(new ID(field.FieldId)) { Name = field.NameHint, Value = field.Value });
                         }
                     }
