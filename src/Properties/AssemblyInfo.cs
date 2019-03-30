@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Rainbow Serialization for FakeDb")]
-[assembly: AssemblyDescription("Can be used instead of FakeDb.Serialization when Unicorn's Rainbow serialization is used in a project")]
+[assembly: AssemblyDescription("A library that deserializes Rainbow (.yml) files into FakeDb items and templates for the purpose of unit/integration testing Sitecore projects.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Sitecore.FakeDb.RainbowSerialization")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCopyright("https://licenses.nuget.org/BSD-3-Clause")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
