@@ -1,4 +1,4 @@
-# Sitecore.FakeDb.RainbowSerialization
+# Sitecore.FakeDb.RainbowDeserializer
 A library that deserializes Rainbow (.yml) files into FakeDb items and templates for the purpose of unit/integration testing Sitecore projects.
 
 ## What are Rainbow files?

@@ -70,10 +70,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="RainbowSerialization-NoDependencies.nuspec" />
-    <None Include="RainbowSerialization.nuspec" />
-    <None Include="Sitecore.FakeDb.RainbowSerialization.1.0.0.nupkg" />
-    <None Include="Sitecore.FakeDb.RainbowSerialization.NoDependencies.1.0.0.nupkg" />
+    <None Include="RainbowDeserializer.NoDependencies.nuspec" />
+    <None Include="RainbowDeserializer.nuspec" />
+    <None Include="Sitecore.FakeDb.RainbowDeserializer.1.0.0.nupkg" />
+    <None Include="Sitecore.FakeDb.RainbowDeserializer.NoDependencies.1.0.0.nupkg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
