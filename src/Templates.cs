@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Sitecore.FakeDb.RainbowSerialization
+namespace Sitecore.FakeDb.RainbowDeserializer
 {
     public static class Templates
     {

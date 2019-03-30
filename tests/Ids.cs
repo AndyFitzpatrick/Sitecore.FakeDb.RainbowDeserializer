@@ -1,4 +1,4 @@
-﻿namespace RainbowSerialization.Tests
+﻿namespace RainbowDeserializer.Tests
 {
     public static class Ids
     {

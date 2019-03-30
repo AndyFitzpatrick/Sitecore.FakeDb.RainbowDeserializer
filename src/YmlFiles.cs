@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace Sitecore.FakeDb.RainbowSerialization
+namespace Sitecore.FakeDb.RainbowDeserializer
 {
     public static class YmlFiles
     {

@@ -7,11 +7,11 @@
     <authors>Andy Fitzpatrick</authors>
     <owners>Andy Fitzpatrick</owners>
     <licenseUrl>https://licenses.nuget.org/BSD-3-Clause</licenseUrl>
-    <projectUrl>https://github.com/AndyFitzpatrick/Sitecore.FakeDb.RainbowSerialization</projectUrl>
+    <projectUrl>https://github.com/AndyFitzpatrick/Sitecore.FakeDb.RainbowDeserializer</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>Initial release.</releaseNotes>
     <copyright>Copyright 2019</copyright>
-    <tags>RainbowSerialization, Sitecore, FakeDb, Rainbow, test, deserialize</tags>
+    <tags>RainbowDeserializer, Sitecore, FakeDb, Rainbow, test, deserialize</tags>
   </metadata>
 </package>

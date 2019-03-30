@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Linq;
 
-namespace RainbowSerialization.Tests
+namespace RainbowDeserializer.Tests
 {
     public static class Dbs
     {
@@ -20,7 +20,7 @@ namespace RainbowSerialization.Tests
         public static Db Japanese()
         {
             var db = new Db();
-            db.Configuration.Settings["RainbowSerialization_Language"] = "ja-JP";
+            db.Configuration.Settings["RainbowDeserializer_Language"] = "ja-JP";
             db.AddYml(true,
                 GetPathTo("Content"),
                 GetPathTo("Templates"));

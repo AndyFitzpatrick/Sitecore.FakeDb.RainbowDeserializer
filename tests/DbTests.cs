@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RainbowSerialization;
+using RainbowDeserializer;
 using Sitecore.FakeDb;
 
-namespace RainbowSerialization.Tests
+namespace RainbowDeserializer.Tests
 {
     [TestClass]
     public class DbTests

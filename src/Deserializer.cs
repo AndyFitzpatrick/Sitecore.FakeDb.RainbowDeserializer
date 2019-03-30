@@ -5,7 +5,7 @@ using System;
 using System.IO;
 using System.Linq;
 
-namespace Sitecore.FakeDb.RainbowSerialization
+namespace Sitecore.FakeDb.RainbowDeserializer
 {
     /// <summary>
     /// Deserializes .yml serialized Sitecore items into FakeDb's DbItem and adds them

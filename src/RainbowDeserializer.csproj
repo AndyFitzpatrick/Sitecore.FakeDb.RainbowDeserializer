@@ -7,8 +7,8 @@
     <ProjectGuid>{01F624CE-009C-4FEE-AE2E-A5453CBDD626}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sitecore.FakeDb.RainbowSerialization</RootNamespace>
-    <AssemblyName>Sitecore.FakeDb.RainbowSerialization</AssemblyName>
+    <RootNamespace>Sitecore.FakeDb.RainbowDeserializer</RootNamespace>
+    <AssemblyName>Sitecore.FakeDb.RainbowDeserializer</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

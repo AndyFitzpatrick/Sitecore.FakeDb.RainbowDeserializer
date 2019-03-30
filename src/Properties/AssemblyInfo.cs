@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("A library that deserializes Rainbow (.yml) files into FakeDb items and templates for the purpose of unit/integration testing Sitecore projects.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Sitecore.FakeDb.RainbowSerialization")]
+[assembly: AssemblyProduct("Sitecore.FakeDb.RainbowDeserializer")]
 [assembly: AssemblyCopyright("https://licenses.nuget.org/BSD-3-Clause")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
