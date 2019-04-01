@@ -17,6 +17,16 @@ namespace RainbowDeserializer.Tests
             return db;
         }
 
+        public static Db DefaultNoMerge()
+        {
+            var db = new Db();
+            db.AddYml(false,
+                GetPathTo("Content"),
+                GetPathTo("Templates"));
+
+            return db;
+        }
+
         public static Db Japanese()
         {
             var db = new Db();
@@ -32,6 +42,15 @@ namespace RainbowDeserializer.Tests
         {
             var db = new Db();
             db.AddYml(true,
+                GetPathTo("Content"));
+
+            return db;
+        }
+
+        public static Db ContentOnlyNoMerge()
+        {
+            var db = new Db();
+            db.AddYml(false,
                 GetPathTo("Content"));
 
             return db;

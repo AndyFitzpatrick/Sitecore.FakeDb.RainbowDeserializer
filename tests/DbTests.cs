@@ -53,6 +53,51 @@ namespace RainbowDeserializer.Tests
         }
 
         [TestMethod]
+        public void DefaultNoMerge_HabitatHome_NotNull()
+        {
+            // Arrange
+            using (var db = Dbs.DefaultNoMerge())
+            {
+
+                // Act
+                var home = db.GetItem(Ids.Habitat);
+
+                // Assert
+                Assert.IsNotNull(home);
+            }
+        }
+
+        [TestMethod]
+        public void DefaultNoMerge_HabitatHome_CorrectID()
+        {
+            // Arrange
+            using (var db = Dbs.DefaultNoMerge())
+            {
+
+                // Act
+                var home = db.GetItem(Ids.Habitat);
+
+                // Assert
+                Assert.IsTrue(home.ID == new Sitecore.Data.ID(Ids.Habitat));
+            }
+        }
+
+        [TestMethod]
+        public void DefaultNoMerge_HabitatHome_CorrectTitle()
+        {
+            // Arrange
+            using (var db = Dbs.DefaultNoMerge())
+            {
+
+                // Act
+                var home = db.GetItem(Ids.Habitat);
+
+                // Assert
+                Assert.IsTrue(home["Title"] == "About Habitat");
+            }
+        }
+
+        [TestMethod]
         public void Default_HabitatHomeTemplate_NotNull()
         {
             // Arrange
@@ -102,6 +147,36 @@ namespace RainbowDeserializer.Tests
         {
             // Arrange
             using (var db = Dbs.ContentOnly())
+            {
+
+                // Act
+                var login = db.GetItem(Ids.Login);
+
+                // Assert
+                Assert.IsTrue(login["Title"] == "Login");
+            }
+        }
+
+        [TestMethod]
+        public void ContentOnlyNoMerge_Login_NotNull()
+        {
+            // Arrange
+            using (var db = Dbs.ContentOnlyNoMerge())
+            {
+
+                // Act
+                var login = db.GetItem(Ids.Login);
+
+                // Assert
+                Assert.IsNotNull(login);
+            }
+        }
+
+        [TestMethod]
+        public void ContentOnlyNoMerge_Login_CorrectTitle()
+        {
+            // Arrange
+            using (var db = Dbs.ContentOnlyNoMerge())
             {
 
                 // Act
