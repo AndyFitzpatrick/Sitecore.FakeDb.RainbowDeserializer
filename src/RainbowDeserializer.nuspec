@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
+    <id>RainbowDeserializerToFakeDb</id>
     <version>$version$</version>
-    <title>$title$</title>
+    <title>Sitecore.FakeDb.RainbowDeserializer</title>
     <authors>Andy Fitzpatrick</authors>
     <owners>Andy Fitzpatrick</owners>
-    <licenseUrl>https://licenses.nuget.org/BSD-3-Clause</licenseUrl>
+    <license type="expression">BSD-3-Clause</license>
     <projectUrl>https://github.com/AndyFitzpatrick/Sitecore.FakeDb.RainbowDeserializer</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Initial release.</releaseNotes>
+    <releaseNotes>Updated License</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>RainbowDeserializer, Sitecore, FakeDb, Rainbow, test, deserialize</tags>
   </metadata>
