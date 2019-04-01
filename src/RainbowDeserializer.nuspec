@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/AndyFitzpatrick/Sitecore.FakeDb.RainbowDeserializer</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Updated License</releaseNotes>
+    <releaseNotes>Fixing an issue with the indexing of missing fields.</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>RainbowDeserializer, Sitecore, FakeDb, Rainbow, test, deserialize</tags>
   </metadata>

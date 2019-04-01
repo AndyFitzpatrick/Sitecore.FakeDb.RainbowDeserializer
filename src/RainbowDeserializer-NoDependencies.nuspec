@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>RainbowDeserializerToFakeDb.NoDependencies</id>
-    <version>1.0.0</version>
+    <version>1.0.3</version>
     <title>Sitecore.FakeDb.RainbowDeserializer (NoDependencies)</title>
     <authors>Andy Fitzpatrick</authors>
     <owners>Andy Fitzpatrick</owners>
@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/AndyFitzpatrick/Sitecore.FakeDb.RainbowDeserializer</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A library that deserializes Rainbow (.yml) files into FakeDb items and templates for the purpose of unit/integration testing Sitecore projects.</description>
-    <releaseNotes>Initial release.</releaseNotes>
+    <releaseNotes>Fixing an issue with the indexing of missing fields.</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>RainbowDeserializer, Sitecore, FakeDb, Rainbow, test, deserializer</tags>
   </metadata>
