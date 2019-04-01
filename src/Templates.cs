@@ -46,6 +46,7 @@ namespace Sitecore.FakeDb.RainbowDeserializer
                     items[i].TemplateID != Sitecore.TemplateIDs.MediaFolder)
                 {
                     var existing = templates.FirstOrDefault(t => t.ID == items[i].TemplateID);
+
                     if (existing == null)
                     {
                         //Add missing templates
@@ -54,7 +55,7 @@ namespace Sitecore.FakeDb.RainbowDeserializer
 
                         foreach (var field in items[i].Fields.Where(field => !field.Name.StartsWith("__")))
                         {
-                            if (!missingFields.Fields.Any(f => f.Name == field.Name))
+                            if (!missingFields.Fields.Any(f => f.ID == field.ID))
                                 missingFields.Fields.Add(new DbField(field.Name, field.ID));
                         }
 
@@ -63,12 +64,23 @@ namespace Sitecore.FakeDb.RainbowDeserializer
                     else
                     {
                         // Add missing fields
-                        var baseFields = BaseTemplateFields(existing, templates);
-                        foreach (var field in items[i].Fields.Where(field => !field.Name.StartsWith("__") && 
-                            !existing.Fields.Any(tfield => tfield.Name == field.Name) &&
-                            !baseFields.Any(bField => bField.Name == field.Name)))
+                        var fields = items[i].Fields.Where(f => !f.Name.StartsWith("__"));
+
+                        if (fields.Count() > 0)
+                            fields = fields.Where(f => !existing.Fields.Any(tfield => tfield.ID == f.ID));
+
+                        if (fields.Count() > 0)
                         {
-                            if (!missingFields.Fields.Any(f => f.Name == field.Name))
+                            var baseFields = BaseTemplateFields(existing, templates);
+                            fields = fields.Where(f => !baseFields.Any(bField => bField.ID == f.ID));
+                        }
+
+                        if (fields.Count() > 0)
+                            fields = fields.Where(f => !templates.Any(t => t.Fields.Any(tf => tf.ID == f.ID)));
+
+                        foreach (var field in fields)
+                        {
+                            if (!missingFields.Fields.Any(f => f.ID == field.ID))
                                 missingFields.Fields.Add(new DbField(field.Name, field.ID));
 
                             if (!existing.BaseIDs.Contains(missingFields.ID))
