@@ -52,7 +52,7 @@ namespace Sitecore.FakeDb.RainbowDeserializer
                         DbTemplate template = new DbTemplate(items[i].TemplateID);
                         template.BaseIDs = new ID[] { missingFields.ID };
 
-                        foreach (var field in items[0].Fields.Where(field => !field.Name.StartsWith("__")))
+                        foreach (var field in items[i].Fields.Where(field => !field.Name.StartsWith("__")))
                         {
                             if (!missingFields.Fields.Any(f => f.Name == field.Name))
                                 missingFields.Fields.Add(new DbField(field.Name, field.ID));
@@ -64,7 +64,7 @@ namespace Sitecore.FakeDb.RainbowDeserializer
                     {
                         // Add missing fields
                         var baseFields = BaseTemplateFields(existing, templates);
-                        foreach (var field in items[0].Fields.Where(field => !field.Name.StartsWith("__") && 
+                        foreach (var field in items[i].Fields.Where(field => !field.Name.StartsWith("__") && 
                             !existing.Fields.Any(tfield => tfield.Name == field.Name) &&
                             !baseFields.Any(bField => bField.Name == field.Name)))
                         {
