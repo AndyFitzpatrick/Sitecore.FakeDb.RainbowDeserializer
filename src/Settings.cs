@@ -1,4 +1,4 @@
-﻿namespace Sitecore.FakeDb.RainbowSerialization
+﻿namespace Sitecore.FakeDb.RainbowDeserializer
 {
     public static class Settings
     {
@@ -10,8 +10,8 @@
             {
                 if (string.IsNullOrEmpty(_language))
                 {
-                    if (!string.IsNullOrEmpty(Sitecore.Configuration.Settings.GetSetting("RainbowSerialization_Language")))
-                        _language = Sitecore.Configuration.Settings.GetSetting("RainbowSerialization_Language");
+                    if (!string.IsNullOrEmpty(Sitecore.Configuration.Settings.GetSetting("RainbowDeserializer_Language")))
+                        _language = Sitecore.Configuration.Settings.GetSetting("RainbowDeserializer_Language");
                     else
                         _language = "en";
                 }

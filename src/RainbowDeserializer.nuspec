@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>RainbowDeserializerToFakeDb</id>
+    <version>$version$</version>
+    <title>Sitecore.FakeDb.RainbowDeserializer</title>
+    <authors>Andy Fitzpatrick</authors>
+    <owners>Andy Fitzpatrick</owners>
+    <license type="expression">BSD-3-Clause</license>
+    <projectUrl>https://github.com/AndyFitzpatrick/Sitecore.FakeDb.RainbowDeserializer</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Updated License</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>RainbowDeserializer, Sitecore, FakeDb, Rainbow, test, deserialize</tags>
+  </metadata>
+</package>

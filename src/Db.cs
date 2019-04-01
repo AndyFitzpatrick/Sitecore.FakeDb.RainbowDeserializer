@@ -1,6 +1,6 @@
 ﻿using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
-using Sitecore.FakeDb.RainbowSerialization;
+using Sitecore.FakeDb.RainbowDeserializer;
 using System.Collections.Generic;
 using System.Linq;
 
