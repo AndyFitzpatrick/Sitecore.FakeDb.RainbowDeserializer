@@ -37,7 +37,7 @@ namespace Sitecore.FakeDb.RainbowDeserializer
 
         private static void AddMissing(List<DbItem> items, List<DbTemplate> templates)
         {
-            DbTemplate missingFields = new DbTemplate("Missing Fields", new ID());
+            DbTemplate missingFields = new DbTemplate("Missing Fields", new ID(Guid.NewGuid()));
 
             for (int i = 0; i < items.Count; i++)
             {
@@ -78,8 +78,7 @@ namespace Sitecore.FakeDb.RainbowDeserializer
                 }
             }
 
-            if (missingFields.Fields.Count() > 0)
-                templates.Add(missingFields);
+            templates.Add(missingFields);
         }
 
         private static ID[] BaseTemplateIds(DbItem item)
