@@ -30,12 +30,12 @@ namespace Sitecore.FakeDb.RainbowDeserializer
                 templates.Add(template);
             }
 
-            AddMissing(items, templates);
+            AddMissing(items, templates, GetAllFields(templates));
 
             return templates;
         }
 
-        private static void AddMissing(List<DbItem> items, List<DbTemplate> templates)
+        private static void AddMissing(List<DbItem> items, List<DbTemplate> templates, List<DbField> fields)
         {
             DbTemplate missingFields = new DbTemplate("Missing Fields", new ID(Guid.NewGuid()));
 
@@ -53,7 +53,7 @@ namespace Sitecore.FakeDb.RainbowDeserializer
                         DbTemplate template = new DbTemplate(items[i].TemplateID);
                         template.BaseIDs = new ID[] { missingFields.ID };
 
-                        foreach (var field in items[i].Fields.Where(field => !field.Name.StartsWith("__")))
+                        foreach (var field in items[i].Fields.Where(field => !field.Name.StartsWith("__") && !fields.Any(tfield => tfield.ID == f.ID)))
                         {
                             if (!missingFields.Fields.Any(f => f.ID == field.ID))
                                 missingFields.Fields.Add(new DbField(field.Name, field.ID));
@@ -64,21 +64,9 @@ namespace Sitecore.FakeDb.RainbowDeserializer
                     else
                     {
                         // Add missing fields
-                        var fields = items[i].Fields.Where(f => !f.Name.StartsWith("__"));
+                        var missing = items[i].Fields.Where(f => !f.Name.StartsWith("__") && !fields.Any(tfield => tfield.ID == f.ID));
 
-                        if (fields.Count() > 0)
-                            fields = fields.Where(f => !existing.Fields.Any(tfield => tfield.ID == f.ID));
-
-                        if (fields.Count() > 0)
-                        {
-                            var baseFields = BaseTemplateFields(existing, templates);
-                            fields = fields.Where(f => !baseFields.Any(bField => bField.ID == f.ID));
-                        }
-
-                        if (fields.Count() > 0)
-                            fields = fields.Where(f => !templates.Any(t => t.Fields.Any(tf => tf.ID == f.ID)));
-
-                        foreach (var field in fields)
+                        foreach (var field in missing)
                         {
                             if (!missingFields.Fields.Any(f => f.ID == field.ID))
                                 missingFields.Fields.Add(new DbField(field.Name, field.ID));
@@ -127,6 +115,19 @@ namespace Sitecore.FakeDb.RainbowDeserializer
                     foreach (var bt in baseTemplates)
                         fields.AddRange(bt.Fields);
                 }
+            }
+
+            return fields;
+        }
+
+        private static List<DbField> GetAllFields(List<DbTemplate> templates)
+        {
+            List<DbField> fields = new List<DbField>();
+
+            if (templates != null && templates.Count > 0)
+            {
+                foreach (DbTemplate template in templates)
+                    fields.AddRange(template.Fields);
             }
 
             return fields;
