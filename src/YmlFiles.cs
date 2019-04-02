@@ -24,22 +24,12 @@ namespace Sitecore.FakeDb.RainbowDeserializer
 
             if (info != null)
             {
-                var files = info.GetFiles("*.yml", SearchOption.TopDirectoryOnly);
+                var files = info.GetFiles("*.yml", SearchOption.AllDirectories);
 
                 if (files != null && files.Length > 0)
                 {
                     foreach (FileInfo file in files)
                         items.AddRange(ToDbItems(file));
-                }
-                else
-                {
-                    var subdirectories = info.GetDirectories();
-
-                    if (subdirectories != null && subdirectories.Length > 0)
-                    {
-                        foreach (var subdirectory in subdirectories)
-                            items.AddRange(ToDbItems(subdirectory));
-                    }
                 }
             }
 
@@ -60,21 +50,8 @@ namespace Sitecore.FakeDb.RainbowDeserializer
 
                     var folder = new DirectoryInfo(file.Directory.FullName + "\\" + file.Name.Replace(".yml", ""));
                     if (folder.Exists)
-                        items.AddRange(RecursivelyFindFiles(folder));
+                        items.AddRange(ToDbItems(folder));
                 }
-            }
-
-            return items;
-        }
-
-        private static List<DbItem> RecursivelyFindFiles(DirectoryInfo info)
-        {
-            List<DbItem> items = new List<DbItem>();
-
-            if (info != null)
-            {
-                foreach (FileInfo file in info.GetFiles("*.yml", SearchOption.TopDirectoryOnly))
-                    items.AddRange(ToDbItems(file));
             }
 
             return items;
