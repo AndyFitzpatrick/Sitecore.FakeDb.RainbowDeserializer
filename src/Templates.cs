@@ -45,34 +45,37 @@ namespace Sitecore.FakeDb.RainbowDeserializer
                     items[i].TemplateID != Sitecore.TemplateIDs.Folder &&
                     items[i].TemplateID != Sitecore.TemplateIDs.MediaFolder)
                 {
-                    var existing = templates.FirstOrDefault(t => t.ID == items[i].TemplateID);
+                    var missing = items[i].Fields.Where(f => !f.Name.StartsWith("__") && !fields.Any(tfield => tfield.ID == f.ID));
 
-                    if (existing == null)
+                    if (missing != null && missing.Count() > 0)
                     {
-                        //Add missing templates
-                        DbTemplate template = new DbTemplate(items[i].TemplateID);
-                        template.BaseIDs = new ID[] { missingFields.ID };
+                        var existing = templates.FirstOrDefault(t => t.ID == items[i].TemplateID);
 
-                        foreach (var field in items[i].Fields.Where(field => !field.Name.StartsWith("__") && !fields.Any(tfield => tfield.ID == f.ID)))
+                        if (existing == null)
                         {
-                            if (!missingFields.Fields.Any(f => f.ID == field.ID))
-                                missingFields.Fields.Add(new DbField(field.Name, field.ID));
+                            //Add missing templates
+                            DbTemplate template = new DbTemplate(items[i].TemplateID);
+                            template.BaseIDs = new ID[] { missingFields.ID };
+
+                            foreach (var field in missing)
+                            {
+                                if (!missingFields.Fields.Any(f => f.ID == field.ID))
+                                    missingFields.Fields.Add(new DbField(field.Name, field.ID));
+                            }
+
+                            templates.Add(template);
                         }
-
-                        templates.Add(template);
-                    }
-                    else
-                    {
-                        // Add missing fields
-                        var missing = items[i].Fields.Where(f => !f.Name.StartsWith("__") && !fields.Any(tfield => tfield.ID == f.ID));
-
-                        foreach (var field in missing)
+                        else
                         {
-                            if (!missingFields.Fields.Any(f => f.ID == field.ID))
-                                missingFields.Fields.Add(new DbField(field.Name, field.ID));
+                            // Add missing fields
+                            foreach (var field in missing)
+                            {
+                                if (!missingFields.Fields.Any(f => f.ID == field.ID))
+                                    missingFields.Fields.Add(new DbField(field.Name, field.ID));
 
-                            if (!existing.BaseIDs.Contains(missingFields.ID))
-                                existing.BaseIDs = existing.BaseIDs.Concat(new ID[] { missingFields.ID }).ToArray();
+                                if (!existing.BaseIDs.Contains(missingFields.ID))
+                                    existing.BaseIDs = existing.BaseIDs.Concat(new ID[] { missingFields.ID }).ToArray();
+                            }
                         }
                     }
                 }
@@ -100,24 +103,6 @@ namespace Sitecore.FakeDb.RainbowDeserializer
                 return ids.Where(id => id == TemplateIDs.Template || items.Any(i => i.ID == id)).ToArray();
             else
                 return new ID[0];
-        }
-
-        private static IEnumerable<DbField> BaseTemplateFields(DbTemplate template, List<DbTemplate> templates)
-        {
-            List<DbField> fields = new List<DbField>();
-
-            if (template != null && template.BaseIDs != null && template.BaseIDs.Length > 0)
-            {
-                var baseTemplates = templates.Where(t => template.BaseIDs.Contains(t.ID));
-
-                if (baseTemplates != null && baseTemplates.Count() > 0)
-                {
-                    foreach (var bt in baseTemplates)
-                        fields.AddRange(bt.Fields);
-                }
-            }
-
-            return fields;
         }
 
         private static List<DbField> GetAllFields(List<DbTemplate> templates)
